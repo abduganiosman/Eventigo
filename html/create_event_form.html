@@ -1,0 +1,138 @@
+<!--basic form styles-->
+<style type="text/css">
+	#requiredEventName, #requiredGenre, #requiredLocation
+	{
+		color: #d33e43;
+		font-size: 85%;
+		font-weight: bold;
+	}
+	#createEvent input, #createEvent select, #createEvent textarea {width: 65%;}
+</style>
+
+<!--create event form with js validation and php script for processing data-->
+<form id="createEvent" name="createEvent" action="scripts/process_event_creation.php"
+onsubmit="return validateCreateEvent()" method="POST">
+	<h2>Create Event</h2>
+
+	<!--event name-->
+	<input type="text" name="eventName" id="txtEventName" placeholder="Name of event" class="form-control" />
+	<span id="requiredEventName"></span><p /><p />
+
+	<!--event genre-->
+	<select name="cmbGenres" id="genre" class="form-control"
+	onchange="if (this.value=='Other'){
+	this.form['pleaseSpecify'].style.visibility='visible'}
+	else {this.form['pleaseSpecify'].style.visibility='hidden'};">
+		<option value="pleaseSelect">Please select a genre</option>
+		<option value="Sports">Sports</option>
+		<option value="Meeting/Conference">Meeting/Conference</option>
+		<option value="Party">Party</option>
+		<option value="Clubnight">Clubnight</option>
+		<option value="Concert">Concert</option>
+		<option value="Dinner/Social">Dinner/Social</option>
+		<option value="Networking">Networking</option>
+		<option value="Award Ceremony">Award Ceremony</option>
+		<option value="Birthday">Birthday</option>
+		<option value="Wedding">Wedding</option>
+		<option value="Other">Other</option>
+	</select>
+	<span id="requiredGenre"></span><p />
+
+	<!-- Number of tickets -->
+	Total Number of tickets<br />
+	<input type="text" name="totalTickets" id="txtNumberOfTickets" value="1" class="form-control" onchange="checkMorethanZero(this.value)" />
+<p />
+	<!-- cost of tickets -->
+	Cost per Ticket <br />
+	<input type="text" name="ticketCost" id="txtCostOfTickets" placeholder="0 is free Tickets" class="form-control" />
+	<p />
+
+	<!--event date and time-->
+	Date:<br />
+	<input type="date" name="eventDate" id="txtEventDate" class="form-control" required /><p />
+	<input type="date" name="eventEndDate" id="txtEventEndDate" class="form-control" required /><p />
+	Time:<br />
+	<input type="time" name="eventStartTime" id="txtEventStartTime" value="17:00" class="form-control" required /><p />
+	<input type="time" name="eventEndTime" id="txtEventEndTime" value="18:00" class="form-control" required />
+
+	<!--event location-->
+	<div id='printoutPanel'></div>
+	<div id='searchBoxContainer'>
+		<input type='text' name="eventLocation" id='searchBox' class="form-control" placeholder="Location of event" />
+		<span id="requiredLocation"></span>
+	</div><p /><p />
+
+	<!--event description and submitting event-->
+			<textarea name="descriptionText" id="txtDescription" class="form-control" placeholder="Description of event"></textarea><p />
+
+		<!--add review to review page or clear fields-->
+			<input type="submit" />
+
+</form>
+
+<script>
+
+
+
+</script>
+<script type="text/javascript">
+	//load current date for start and end time fields
+	document.getElementById('txtEventDate').valueAsDate = new Date();
+	document.getElementById('txtEventEndDate').valueAsDate = new Date();
+</script>
+<script type="text/javascript" src="validate_create_event.js"></script>
+
+<!--importing bing map api and js for searching for location-->
+<script type="text/javascript" src="../js/bing_maps.js"></script>
+<script
+	type='text/javascript'
+	src='https://www.bing.com/api/maps/mapcontrol?key=YourBingMapsKey&callback=loadMapScenario'
+	async defer>
+</script>
+
+<script>
+
+class Event
+{
+	function setdata()
+	{
+			//storing values entered by user
+			var eventName = document.getElementById('txtEventName').value;
+			var genre = document.getElementById('genre').value;
+			var numberOfTickets = document.getElementById('txtNumberOfTickets').value;
+			var ticketCost = document.getElementById('txtCostOfTickets').value;
+			var startDate = document.getElementById('txtEventDate').value;
+			var endDate = document.getElementById('txtEventEndDate').value;
+			var startTime = document.getElementById('txtEventStartTime').value;
+			var endTime = document.getElementById('txtEventEndTime').value;
+			var location = document.getElementById('searchBox').value;
+			var description = document.getElementById('txtDescription').value;
+
+			//post name and variable name for different fields
+			var newEvent = {
+				'eventName': eventName,
+				'cmbGenres': genre,
+				'totalTickets': numberOfTickets,
+				'ticketCost': ticketCost,
+				'eventDate': startDate,
+				'eventEndDate': endDate,
+				'eventStartTime': startTime,
+				'eventEndTime': endTime,
+				'eventLocation': location,
+				'descriptionText': description,
+			};
+
+			//passing data into php using ajax
+			$.ajax({
+						type: "POST",
+						dataType: "json",
+						url: "scripts/process_event_creation.php",
+						data: newEvent,
+						success: function(data) {
+
+						}
+					});
+
+	}//end setdata()
+}//end Event class
+</script>

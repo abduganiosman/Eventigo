@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up For Eventigo</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+
+                      <form name="myForm" action="registration.php" onsubmit="return setdata()" method="post">
+
+                        <h2 class="form-title">Create Eventigo account</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="firstname" id="name" placeholder="Your Firstname" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="lastname" id="email" placeholder="Your lastname" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="username" id="email" placeholder="Your Username" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="password" id="password" placeholder="Password" required/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="address" id="re_password" placeholder="Address" required/>
+                        </div>
+
+
+                        <div class="form-group">
+                        Premium Membership:
+                          <input type="radio" name="check" id="myCheck"> Yes
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                        </div>
+
+                    </form>
+                    <p class="loginhere">
+                        Have already an account ? <a href="login.html" class="loginhere-link">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+
+    <script>
+
+  class Address{
+
+    function getaddress(){
+
+      var address = document.getElementById('address').value;
+      return address;
+
+    }
+
+  }
+
+  class PremiumUser{
+
+    function createpremiumuser(){
+
+      var switchStatus = false;
+      $("#togBtn").on('change', function() {
+    if ($(this).is(':checked')) {
+        switchStatus = $(this).is(':checked');
+        return "on";
+    }
+    else {
+       switchStatus = $(this).is(':checked');
+    }
+});
+
+
+    }
+
+  }
+
+class Customer{
+
+    function setdata() {
+
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var firstname = document.getElementById('firstname').value;
+        var lastname = document.getElementById('lastname').value;
+
+        var user = {
+          'username': username,
+          'password': password,
+          'firstname': firstname,
+          'lastname': lastname,
+          'address': getaddress(),
+          'pre' : createpremiumuser()
+        };
+
+
+
+          $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "registration.php", //Relative or absolute path to response.php file
+                data: data,
+                success: function(data) {
+
+                }
+              });
+
+
+    }//end myFunction
+}
+    </script>
+
+
+
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

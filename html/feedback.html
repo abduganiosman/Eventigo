@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="Feedbackstyle.css">
+<body>
+<center>
+<h1> Give Eventigo Some Feedback </h1>
+<div id="background">
+<form action="" id="formArea" >
+  <b>First name:</b>
+  <br>
+  <input type="text" name="firstname" value="" id="name">
+  <br>
+  <br>
+  <b>Last name:</b>
+    <br>
+  <input type="text" name="lastname" value="">
+  <br>
+  <br>
+  <b>Email:</b>
+  <br>
+  <input type="text" name="email" value="">
+  <br>
+  <br>
+  <b>Review</b>
+  <br>
+  <textarea rows="4" cols="50" id="textReview">
+
+  </textarea>
+  <br>
+  <br>
+  <b>Nature of Review</b>
+  <br>
+  <input type="radio" name="NatureOfReview" value="Positive"> Positive <br>
+    <input type="radio" name="NatureOfReview" value="Neutral"> Neutral<br>
+      <input type="radio" name="NatureOfReview" value="Negative"> Negative<br>
+<br>
+  <input type="submit" value="Send Feedback" onclick="ConfirmationMessage()" id="buttonSub">
+</form>
+</center>
+</div>
+
+</body>
+<script>
+
+function ConfirmationMessage()
+{
+ window.alert("Thank you for your feedback you'll be redirected back to the main Eventigo page!");
+ console.log("Thank you");
+}
+</script>
+
+
+</html>
+
+
+<!-- Note to self
+
+  Link the form to PHP.
+  Return the user name in the JS
+>

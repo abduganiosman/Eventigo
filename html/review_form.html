@@ -1,0 +1,62 @@
+<form class="contact-bg" id="contact-form" name="contact" method="post" novalidate="novalidate"
+action="scripts/process_review.php" onsubmit="return checkReviewTitle()">
+	<input type="text" name="name" id="txtName" class="form-control" placeholder="Your Name" />
+	<div class="stars" data-rating="5">
+		<span class="star rating">&nbsp;</span>
+		<span class="star">&nbsp;</span>
+		<span class="star">&nbsp;</span>
+		<span class="star">&nbsp;</span>
+		<span class="star">&nbsp;</span>
+	</div>
+	<!--hidden field storing rating-->
+	<input type="hidden" name="starRating" id="ratingNumber" />
+	<input type="text" name="email" id="txtNameOfEvent" class="form-control" placeholder="Name of event" />
+	<input type="text" name="reviewTitle" id="txtTitle" class="form-control" placeholder="Title" />
+	<textarea name="message" id="txtMessage" class="form-control" placeholder="Your Message" style="height:120px"></textarea>
+	<button id="submit" type="submit" name="submit" class="btn btn-glance">Send</button>
+	<div id="success">
+		<p class="green textcenter">Your review was submitted successfully! We really appreciate it!</p>
+	</div>
+	<div id="error">
+		<p> Something went wrong, try refreshing and submitting the form again.</p>
+	</div>
+</form>
+
+<script type="text/javascript">
+	function checkReviewTitle()
+	{
+		var title = document.getElementById('txtTitle').value;
+
+		if(title == "" || title == null)
+		{
+			document.getElementById('txtTitle').value = "N/A";
+		}
+	}
+
+
+	class User{
+
+			function writeReview(){
+
+				var reiew = document.getElementById('review').value;
+
+				var reviewing = {
+					'search': review,
+				};
+
+					$.ajax({
+								type: "POST",
+								dataType: "json",
+								url: "scripts/process_review.php", //Relative or absolute path to response.php file
+								data: reviewing,
+								success: function(data) {
+
+								}
+							});
+
+			}
+
+
+
+	}
+</script>

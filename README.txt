@@ -1,0 +1,2 @@
+To get the website to work you need to enter the config file and and change it to a databse of your choice.
+if you are using XAMPP then just create a database called demo and run the CTfirstRun.php file to create all tables required.
